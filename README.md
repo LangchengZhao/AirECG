@@ -8,6 +8,7 @@ The electrocardiogram (ECG) has always served as a crucial biomedical examinatio
 so as to synthesize ECG even during abnormal beats. Furthermore, we enhance the determinacy of AirECG, i.e., to generate high-fidelity ECG, by designing a calibration guidance mechanism to combat the inherent randomness issue 
 of the probabilistic diffusion model. Empirical evaluation demonstrates AirECG's ability of ECG synthesis with Pearson correlation coefficient (PCC) of 0.955 for normal beats. Especially for abnormal beats, the PCC still exhibits a strong correlation of 0.860, with 15.0\%~21.1\% improvement compared with state-of-the-art approaches.
 
+We have released the training and inference source code related to the Cross-domain diffusion model. Developers can configure the training set and test set according to their needs to train a generative model for electrocardiograms (ECG) and perform inference. In the code examples, random values are assigned to the training and testing datasets to ensure that the training and inference processes can run without error. For further development, we recommend using millimeter wave and ECG data with the same shape for training and inference.
 
 ## Setup
 
@@ -26,15 +27,35 @@ conda activate AirECG
 ```
 
 ## Training AirECG
+If you want to train AirECG on real datasets, the DataLoader（line 103） in `train.py` should be modified. The random value in the following code should be replaced by mmWave and ECG data.
+
+```Python
+from torch.utils.data import DataLoader,Dataset
+
+def DataLoader_example(bs):
+    #Load your data here
+    train_mmwave = torch.randn(32, 8, 1024)
+    train_ecg = torch.randn(32, 1024)
+
+    test_mmwave = torch.randn(32, 8, 1024)
+    test_ecg = torch.randn(32, 1024)
+
+    ref_ecg = torch.randn(32, 1024)
+#The remaining content has been omitted.
+```
 
 
-Then, you can run the train.sh to start up the model training. 
+Then, you can run the `train.sh` to start up the model training. 
 ```bash
 CUDA_VISIBLE_DEVICES=0 torchrun --nnodes=1 --nproc_per_node=1 --master_port='29500' train.py --global-batch-size 96
 ```
 
 ## Inference
+Also for model inference, the DataLoader（line 52） in `inference.py` should be modified. Besides, the model weights path should also be specified when run the Python file, like the following:
 
+```bash
+python inference.py --ckpt /path/of/your_model_weight
+```
 
 ## BibTeX
 
