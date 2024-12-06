@@ -1,0 +1,13 @@
+name: AirECG
+channels:
+  - pytorch
+  - nvidia
+dependencies:
+  - python = 3.8.3
+  - pytorch = 1.13.1
+  - torchvision
+  - pytorch-cuda=11.6
+  - pip:
+    - timm
+    - diffusers
+    - accelerate
