@@ -52,9 +52,9 @@ def sample_images(ref, y, x, samples, batchIdx, resultPath, isVal=True):
 from torch.utils.data import DataLoader,Dataset
 def DataLoader_example(bs, personID=0, fold_idx=0, splitChannel = False, mmWaveNorm = True):
     #Load your data here
-    test_mmwave = torch.randn(32, 8, 1024)
-    test_ecg = torch.randn(32, 1024)
-    ref_ecg = torch.randn(32, 1024)
+    test_mmwave = torch.randn(16, 8, 1024)
+    test_ecg = torch.randn(16, 1024)
+    ref_ecg = torch.randn(16, 1024)
 
     def patchingmmWave(inputSignal):
         B = inputSignal.shape[0]

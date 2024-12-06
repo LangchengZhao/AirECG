@@ -34,13 +34,13 @@ from torch.utils.data import DataLoader,Dataset
 
 def DataLoader_example(bs):
     #Load your data here
-    train_mmwave = torch.randn(32, 8, 1024)
-    train_ecg = torch.randn(32, 1024)
+    train_mmwave = torch.randn(96, 8, 1024)
+    train_ecg = torch.randn(96, 1024)
 
-    test_mmwave = torch.randn(32, 8, 1024)
-    test_ecg = torch.randn(32, 1024)
+    test_mmwave = torch.randn(96, 8, 1024)
+    test_ecg = torch.randn(96, 1024)
 
-    ref_ecg = torch.randn(32, 1024)
+    ref_ecg = torch.randn(96, 1024)
 #The remaining content has been omitted.
 ```
 
